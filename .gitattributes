@@ -1,0 +1,162 @@
+# ==============================================================================
+# BYEOLPEDIA - GITATTRIBUTES
+# ==============================================================================
+#
+# Este archivo configura atributos específicos para archivos en el repositorio.
+# Ayuda a mantener la consistencia entre diferentes sistemas operativos
+# y desarrolladores con diferentes configuraciones.
+#
+# ==============================================================================
+
+# ==============================================================================
+# MANEJO DE FINALES DE LÍNEA
+# ==============================================================================
+
+# Normalizar finales de línea a LF en el repositorio
+# Esto evita problemas entre Windows (CRLF) y Unix/Linux/macOS (LF)
+* text=auto eol=lf
+
+# Archivos que deben mantener finales de línea de Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Archivos que deben mantener finales de línea Unix
+*.sh text eol=lf
+Dockerfile text eol=lf
+
+# Archivos binarios que no deben ser modificados
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# ==============================================================================
+# MANEJO DE ESPACIOS EN BLANCO
+# ==============================================================================
+
+# Detectar conflictos de espacios en blanco
+* whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+
+# Archivos Python (restricciones estrictas)
+*.py whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+
+# Archivos JavaScript/JSON
+*.js whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+*.json whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+
+# Archivos CSS/SCSS
+*.css whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+*.scss whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+
+# Archivos HTML/XML
+*.html whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+*.xml whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+
+# Archivos de configuración
+*.yml whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+*.yaml whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+*.toml whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+*.ini whitespace=trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+
+# ==============================================================================
+# DIFERENCIAS ESPECÍFICAS POR TIPO DE ARCHIVO
+# ==============================================================================
+
+# Usar diferenciador específico para archivos Python
+*.py diff=python
+
+# Usar diferenciador específico para archivos HTML
+*.html diff=html
+
+# Usar diferenciador específico para archivos CSS
+*.css diff=css
+
+# ==============================================================================
+# FUSIÓN (MERGE) ESPECÍFICA POR TIPO DE ARCHIVO
+# ==============================================================================
+
+# Estrategia de fusión para archivos Python
+*.py merge=union
+
+# Estrategia de fusión para archivos de configuración JSON
+*.json merge=union
+
+# Estrategia de fusión para archivos YAML
+*.yml merge=union
+*.yaml merge=union
+
+# ==============================================================================
+# EXPORTACIÓN Y ARCHIVOS DE PAQUETE
+# ==============================================================================
+
+# Marcar archivos para exportación
+*.py export-subst
+
+# Archivos que no deben exportarse
+.env export-ignore
+*.key export-ignore
+*.pem export-ignore
+*.crt export-ignore
+
+# ==============================================================================
+# LINGUISTAS Y IDIOMAS
+# ==============================================================================
+
+# Ayudar a GitHub a identificar correctamente los lenguajes
+*.js linguist-language=JavaScript
+*.ts linguist-language=TypeScript
+*.jsx linguist-language=JavaScript
+*.tsx linguist-language=TypeScript
+*.py linguist-language=Python
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.scss linguist-language=SCSS
+*.json linguist-language=JSON
+*.yml linguist-language=YAML
+*.yaml linguist-language=YAML
+*.md linguist-language=Markdown
+*.sh linguist-language=Shell
+*.bat linguist-language=Batch
+
+# ==============================================================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ==============================================================================
+
+# Archivos de configuración de Django
+settings.py linguist-language=Python
+urls.py linguist-language=Python
+wsgi.py linguist-language=Python
+asgi.py linguist-language=Python
+
+# Archivos de migraciones de Django
+migrations/*.py linguist-language=Python
+
+# Archivos de pruebas
+test*.py linguist-language=Python
+*_test.py linguist-language=Python
+tests.py linguist-language=Python
+
+# Archivos de requisitos de Python
+requirements*.txt linguist-language=Python
+
+# Archivos de configuración de Git
+.gitignore text linguist-language=Git-Config
+.gitattributes text linguist-language=Git-Config
+.gitmodules text linguist-language=Git-Config
+
+# Archivos de documentación
+*.md text linguist-language=Markdown
+*.rst text linguist-language=reStructuredText
+
+# ==============================================================================
+# ARCHIVOS DE TERCEROS (VENDOR)
+# ==============================================================================
+
+# Si tienes archivos de terceros, puedes marcarlos así:
+# vendor/** linguist-vendored
+# node_modules/** linguist-vendored
