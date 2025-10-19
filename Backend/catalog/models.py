@@ -15,7 +15,7 @@ class Group(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'groups'
+        db_table = 'catalog_group'
 
 
 class Member(models.Model):
@@ -32,7 +32,7 @@ class Member(models.Model):
         return f"{self.stage_name} ({self.group.name})"
 
     class Meta:
-        db_table = 'members'
+        db_table = 'catalog_member'
 
 
 class Album(models.Model):
@@ -47,7 +47,7 @@ class Album(models.Model):
         return f"{self.title} - {self.group.name}"
 
     class Meta:
-        db_table = 'albums'
+        db_table = 'catalog_album'
 
 
 class AlbumVersion(models.Model):
@@ -61,7 +61,7 @@ class AlbumVersion(models.Model):
         return f"{self.album.title} - {self.version_name}"
 
     class Meta:
-        db_table = 'album_versions'
+        db_table = 'catalog_albumversion'
 
 
 class Photocard(models.Model):
@@ -78,7 +78,7 @@ class Photocard(models.Model):
         return f"{self.name} - {self.group.name}"
 
     class Meta:
-        db_table = 'photocards'
+        db_table = 'catalog_photocard'
 
 
 class Lightstick(models.Model):
@@ -93,4 +93,4 @@ class Lightstick(models.Model):
         return f"{self.name} - {self.group.name}"
 
     class Meta:
-        db_table = 'lightsticks'
+        db_table = 'catalog_lightstick'

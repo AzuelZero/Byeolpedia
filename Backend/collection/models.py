@@ -33,7 +33,7 @@ class UserCollectible(models.Model):
         return f"{self.user.username} - {self.collectible_type}"
 
     class Meta:
-        db_table = 'user_collectibles'
+        db_table = 'collection_collection'
 
 
 class WishlistItem(models.Model):
@@ -58,7 +58,7 @@ class WishlistItem(models.Model):
         return f"{self.user.username} wants {self.collectible_type}"
 
     class Meta:
-        db_table = 'wishlist_items'
+        db_table = 'collection_item'
 
 
 class UserFavoriteGroup(models.Model):
@@ -67,7 +67,7 @@ class UserFavoriteGroup(models.Model):
     favorited_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = 'user_favorite_groups'
+        db_table = 'collection_collection_favorited_by'
         unique_together = ('user', 'group')  # Asegura que un usuario no pueda favoritar el mismo grupo dos veces
 
     def __str__(self):

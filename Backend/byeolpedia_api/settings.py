@@ -129,12 +129,12 @@ WSGI_APPLICATION = 'byeolpedia_api.wsgi.application'
 # SQLite es un archivo de base de datos local, perfecto para desarrollo.
 # Ventajas: Cero configuración, rápido, suficiente para MVP
 # Desventajas: No soporta alta concurrencia, menos features avanzados
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # Archivo de BD en la raíz del proyecto
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',  # Archivo de BD en la raíz del proyecto
+#     }
+# }
 
 # OPCIÓN 2: PostgreSQL (PARA PRODUCCIÓN)
 # Descomenta esto cuando despliegues a producción o necesites PostgreSQL.
@@ -144,17 +144,16 @@ DATABASES = {
 # 3. Instalar driver: pip install psycopg2-binary
 # 4. Configurar variables en .env: DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 # 5. Comentar el bloque SQLite de arriba
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME', default='byeolpedia_db'),
-#         'USER': config('DB_USER', default='postgres'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST', default='localhost'),
-#         'PORT': config('DB_PORT', default='5432'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='byeolpedia'),
+        'USER': config('DB_USER', default='postgres'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+    }
+}
 
 # ==============================================================================
 # AUTENTICACIÓN Y CONTRASEÑAS

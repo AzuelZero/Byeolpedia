@@ -171,4 +171,5 @@ Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) pa
 - Django Framework
 - Django REST Framework
 - Flutter
-- Y a mi familia y amigos.
+- Mi familia y amigos
+- A las 4869 veces que me ha sacado de quicio el proyecto

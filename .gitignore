@@ -275,6 +275,17 @@ test_settings.py
 test_db.sqlite3
 test_*.sqlite3
 
+# Scripts de prueba
+test_db.py
+check_data.py
+simple_check.py
+list_all_tables.py
+check_actual_data.py
+check_tables.sql
+verify_all_data.py
+check_users.py
+check_collection_tables.py
+
 # ==============================================================================
 # EXCEPCIONES (ARCHIVOS QUE SÍ SE INCLUYEN)
 # ==============================================================================
