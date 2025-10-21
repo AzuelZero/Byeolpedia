@@ -24,14 +24,7 @@ local_settings.py
 # BASE DE DATOS
 # ==============================================================================
 
-# Base de datos SQLite (contiene todos los datos del proyecto)
-# Se genera automáticamente con migrate, cada desarrollador tiene la suya
-db.sqlite3
-db.sqlite3-*
-
 # PostgreSQL - Archivos de datos y configuración
-# PostgreSQL no usa archivos simples como SQLite, pero estos patrones
-# cubren posibles archivos generados por herramientas de PostgreSQL
 postgresql.conf
 pg_hba.conf
 pg_ident.conf
@@ -84,6 +77,8 @@ ENV/
 .env/
 virtualenv/
 .ENV/
+env.bak/
+venv.bak/
 
 # ==============================================================================
 # IDE Y EDITORES DE CÓDIGO
@@ -148,12 +143,14 @@ coverage.xml
 /staticfiles/
 /static/
 /static_root/
+/static_collected/
 
 # Archivos subidos por usuarios (imágenes, documentos)
 # Contenido generado por usuarios, no código
 /media/
 /media_root/
 uploads/
+/user_media/
 
 # ==============================================================================
 # MIGRACIONES TEMPORALES
@@ -276,15 +273,12 @@ test_db.sqlite3
 test_*.sqlite3
 
 # Scripts de prueba
-test_db.py
-check_data.py
-simple_check.py
-list_all_tables.py
-check_actual_data.py
-check_tables.sql
-verify_all_data.py
-check_users.py
-check_collection_tables.py
+populate_catalog.py
+
+# Archivos específicos de desarrollo local
+Backend/test_db.py
+Backend/create_superuser.py
+Backend/DJANGO_ADMIN_README.md
 
 # ==============================================================================
 # EXCEPCIONES (ARCHIVOS QUE SÍ SE INCLUYEN)
