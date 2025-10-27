@@ -1,6 +1,8 @@
 # Byeolpedia - K-Pop Tracker MVP
 
-Byeolpedia es una aplicación para seguimiento de grupos de K-Pop, álbumes, photocards y lightsticks. Este proyecto consiste en un backend con Django REST API y un frontend con Flutter.
+Byeolpedia es una aplicación para seguimiento de grupos de K-Pop, álbumes,
+photocards y lightsticks. Este proyecto consiste en un backend con Django REST
+API y un frontend con Flutter.
 
 ## 🚀 Configuración Rápida
 
@@ -13,12 +15,14 @@ Byeolpedia es una aplicación para seguimiento de grupos de K-Pop, álbumes, pho
 ### Instalación
 
 1. **Clona el repositorio**
+
    ```bash
    git clone https://github.com/tu-usuario/byeolpedia.git
    cd byeolpedia
    ```
 
 2. **Crea y activa un entorno virtual**
+
    ```bash
    # Windows
    python -m venv venv
@@ -30,12 +34,14 @@ Byeolpedia es una aplicación para seguimiento de grupos de K-Pop, álbumes, pho
    ```
 
 3. **Instala las dependencias**
+
    ```bash
    cd Backend
    pip install -r requirements.txt
    ```
 
 4. **Configura las variables de entorno**
+
    ```bash
    # Copia el archivo de ejemplo
    cp .env.example .env
@@ -45,33 +51,40 @@ Byeolpedia es una aplicación para seguimiento de grupos de K-Pop, álbumes, pho
    ```
 
 5. **Genera una clave secreta para Django**
+
    ```bash
    python manage.py shell
    >>> from django.core.management.utils import get_random_secret_key
    >>> print(get_random_secret_key())
    ```
+
    Copia esta clave en tu archivo `.env` en la variable `SECRET_KEY`.
 
 6. **Ejecuta las migraciones de la base de datos**
+
    ```bash
    python manage.py migrate
    ```
 
 7. **Crea un superusuario (opcional)**
+
    ```bash
    python manage.py createsuperuser
    ```
 
 8. **Inicia el servidor de desarrollo**
+
    ```bash
    python manage.py runserver
    ```
 
-La API estará disponible en `http://localhost:8000/` y el panel de administración en `http://localhost:8000/admin/`.
+La API estará disponible en `http://localhost:8000/` y el panel de administración
+en `http://localhost:8000/admin/`.
 
 ## 🔐 Configuración de Variables de Entorno
 
-El proyecto utiliza variables de entorno para manejar información sensible como claves secretas, credenciales de base de datos, etc.
+El proyecto utiliza variables de entorno para manejar información sensible como
+claves secretas, credenciales de base de datos, etc.
 
 ### Archivos Importantes
 
@@ -99,7 +112,7 @@ Dependiendo de tu configuración, puedes necesitar estas variables adicionales:
 
 ## 🏗️ Estructura del Proyecto
 
-```
+```text
 byeolpedia/
 ├── Backend/                    # Backend Django REST API
 │   ├── byeolpedia_api/        # Configuración principal de Django
@@ -163,8 +176,8 @@ SECURE_SSL_REDIRECT=True
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) para detalles.
-
+Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) para
+detalles.
 
 ## 🙏 Agradecimientos
 
