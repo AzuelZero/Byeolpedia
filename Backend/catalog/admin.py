@@ -2,15 +2,6 @@ from django.contrib import admin
 from .models import Group, Member, Album, AlbumVersion, Photocard, Lightstick
 
 
-@admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
-    list_display = ('name', 'korean_name', 'agency', 'group_type', 'debut_date')
-    search_fields = ('name', 'korean_name', 'agency')
-    list_filter = ('group_type', 'debut_date')
-    ordering = ('name',)
-    readonly_fields = ('id',)
-
-
 class MemberInline(admin.TabularInline):
     model = Member
     extra = 1
