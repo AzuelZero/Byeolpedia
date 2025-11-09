@@ -110,6 +110,27 @@ Dependiendo de tu configuración, puedes necesitar estas variables adicionales:
 - **Almacenamiento en la nube**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_STORAGE_BUCKET_NAME`
 - **APIs externas**: `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `YOUTUBE_API_KEY`
 
+## 🛠️ Tecnologías Utilizadas
+
+### Backend
+- **Django REST Framework**: Framework principal para la API REST
+- **PostgreSQL**: Base de datos principal (producción)
+- **SQLite**: Base de datos para desarrollo
+- **JWT**: Autenticación con JSON Web Tokens
+- **Django Filters**: Filtrado avanzado de resultados
+- **TensorFlow Lite**: Integración para reconocimiento de imágenes
+
+### Frontend (Próximamente)
+- **Flutter**: Framework multiplataforma para el frontend
+- **TensorFlow Lite**: Ejecución de modelos de ML en el dispositivo
+- **Provider**: Gestión de estado
+- **HTTP**: Cliente para comunicaciones API
+
+### DevOps
+- **Docker**: Contenerización (opcional)
+- **Git**: Control de versiones
+- **GitHub**: Hospedaje del código
+
 ## 🏗️ Estructura del Proyecto
 
 ```text
@@ -117,14 +138,23 @@ byeolpedia/
 ├── Backend/                    # Backend Django REST API
 │   ├── byeolpedia_api/        # Configuración principal de Django
 │   ├── catalog/               # App de catálogo (grupos, álbumes, etc.)
-│   ├── collection/            # App de colección personal
+│   ├── collection/            # App de colección personal y ML
+│   │   ├── ml_views.py        # Vistas para Machine Learning
+│   │   └── models.py          # Modelos de colección y reconocimiento
 │   ├── users/                 # App de gestión de usuarios
+│   │   ├── permissions.py     # Permisos personalizados
+│   │   └── serializers.py     # Serializers de usuarios
 │   ├── manage.py              # Script de gestión de Django
-│   └── requirements.txt       # Dependencias de Python
+│   ├── requirements.txt       # Dependencias de Python
+│   └── README.md              # Documentación del backend
 ├── Frontend/                  # Frontend Flutter (pendiente)
 ├── .env.example               # Plantilla de variables de entorno
 ├── .gitignore                 # Archivos excluidos de Git
-└── README.md                  # Este archivo
+├── LICENSE                    # Licencia del proyecto
+├── Logo App.png              # Logo de la aplicación
+├── README.md                  # Este archivo
+├── setup.bat                  # Script de configuración para Windows
+└── setup.sh                   # Script de configuración para Unix
 ```
 
 ### Comandos Útiles
@@ -181,8 +211,7 @@ detalles.
 
 ## 🙏 Agradecimientos
 
-- Django Framework
-- Django REST Framework
-- Flutter
 - Mi familia y amigos
-- A las 4869 veces que me ha sacado de quicio el proyecto
+- La música, en todas sus facetas, porque sin ella no sería yo
+- Las 4869 veces que me he tropezado
+
