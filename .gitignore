@@ -58,6 +58,10 @@ pg_xlog/
 # Carpetas __pycache__ (bytecode compilado de Python)
 __pycache__/
 */__pycache__/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
 
 # Distribuciones y eggs de Python
 *.egg-info/
@@ -124,6 +128,10 @@ tramp
 debug.log
 *.log
 logs/
+# Asegurar que los logs en subdirectorios también sean ignorados
+**/*.log
+**/debug.log
+**/logs/
 
 # Archivos de cobertura de código
 htmlcov/
