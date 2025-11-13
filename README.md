@@ -1,6 +1,6 @@
-# Byeolpedia - K-Pop Tracker MVP
+# Byeolpedia - Kpop Tracker MVP
 
-Byeolpedia es una aplicación para seguimiento de grupos de K-Pop, álbumes,
+Byeolpedia es una aplicación para seguimiento de grupos de kpop, álbumes,
 photocards y lightsticks. Este proyecto consiste en un backend con Django REST
 API y un frontend con Flutter.
 
@@ -198,11 +198,11 @@ SECURE_SSL_REDIRECT=True
 
 ## 📝 Contribuir
 
-1. Fork del proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit de tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Crea un Pull Request
+1. 🍴 Fork del proyecto
+2. 🌿 Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
+3. 💾 Commit de tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
+4. 📤 Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. 🔃 Crea un Pull Request
 
 ## 📄 Licencia
 
@@ -211,7 +211,7 @@ detalles.
 
 ## 🙏 Agradecimientos
 
-- Mi familia y amigos
-- La música, en todas sus facetas, porque sin ella no sería yo
-- Las 4869 veces que me he tropezado
-
+- 「零は私のすべての始まりだ」 🐺
+- Mi familia y amigos 💙
+- La música, en todas sus facetas, porque sin ella no sería yo 🎼
+- Las 4869 veces que me he tropezado 🥹

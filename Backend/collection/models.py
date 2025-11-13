@@ -19,9 +19,8 @@ class UserCollectible(models.Model):
     lightstick = models.ForeignKey(Lightstick, on_delete=models.CASCADE, null=True, blank=True, related_name='user_collectibles')
     source = models.CharField(max_length=100)
     acquisition_date = models.DateField()
-    purchase_price = models.DecimalField(max_digits=10, decimal_places=2)
-    condition = models.CharField(max_length=50)
-    is_duplicate = models.BooleanField(default=False)
+    purchase_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    quantity = models.PositiveIntegerField(default=1)
     photo = models.URLField(blank=True, null=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
