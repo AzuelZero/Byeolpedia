@@ -1,0 +1,313 @@
+# ==============================================================================
+# BYEOLPEDIA - GITIGNORE
+# ==============================================================================
+# Archivo .gitignore para el proyecto Byeolpedia (K-Pop Tracker MVP)
+# 
+# Filtra archivos sensibles, temporales y generados automáticamente.
+# Permite que otros desarrolladores clonen el repo y lo pongan en marcha
+# solo con un archivo .env.example como referencia.
+
+# ==============================================================================
+# VARIABLES DE ENTORNO Y CONFIGURACIÓN SENSIBLE
+# ==============================================================================
+
+# Archivo .env con variables de entorno (claves secretas, credenciales)
+# CRÍTICO: NUNCA subir este archivo al repositorio
+.env
+
+# Archivos de configuración local que pueden contener datos sensibles
+config/local_settings.py
+config/production.py
+local_settings.py
+
+# ==============================================================================
+# BASE DE DATOS
+# ==============================================================================
+
+# PostgreSQL - Archivos de datos y configuración
+postgresql.conf
+pg_hba.conf
+pg_ident.conf
+postgresql.auto.conf
+postmaster.opts
+postmaster.pid
+
+# Archivos de datos de PostgreSQL (si se usa localmente)
+data/
+pgdata/
+pg_data/
+
+# Archivos de WAL (Write-Ahead Logging) de PostgreSQL
+pg_wal/
+pg_xlog/
+
+# Archivos de respaldo de bases de datos
+*.sql
+*.dump
+*.backup
+*.pgc
+
+# ==============================================================================
+# ARCHIVOS TEMPORALES Y DE SISTEMA
+# ==============================================================================
+
+# Archivos temporales de Python
+*.py[cod]
+*$py.class
+
+# Carpetas __pycache__ (bytecode compilado de Python)
+__pycache__/
+*/__pycache__/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Distribuciones y eggs de Python
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+sdist/
+wheels/
+
+# Entornos virtuales (cada desarrollador usa el suyo)
+# Nombres comunes de entornos virtuales
+venv/
+env/
+ENV/
+.venv/
+.env/
+virtualenv/
+.ENV/
+env.bak/
+venv.bak/
+
+# ==============================================================================
+# IDE Y EDITORES DE CÓDIGO
+# ==============================================================================
+
+# VSCode
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ==============================================================================
+# LOGS Y DEPURACIÓN
+# ==============================================================================
+
+# Archivos de log (configurados en settings.py)
+debug.log
+*.log
+logs/
+# Asegurar que los logs en subdirectorios también sean ignorados
+**/*.log
+**/debug.log
+**/logs/
+
+# Archivos de cobertura de código
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# ==============================================================================
+# ARCHIVOS ESTÁTICOS Y MEDIA
+# ==============================================================================
+
+# Archivos estáticos compilados (collectstatic)
+# Se generan en producción, no en desarrollo
+/staticfiles/
+/static/
+/static_root/
+/static_collected/
+
+# Archivos subidos por usuarios (imágenes, documentos)
+# Contenido generado por usuarios, no código
+/media/
+/media_root/
+uploads/
+/user_media/
+
+# ==============================================================================
+# MIGRACIONES TEMPORALES
+# ==============================================================================
+
+# Archivos de migración temporales o conflictivos
+# Las migraciones oficiales sí se suben al repo
+*/migrations/backup_*.py
+*/migrations/temp_*.py
+*/migrations/rollback_*.py
+
+# ==============================================================================
+# DEPENDENCIAS Y PAQUETES
+# ==============================================================================
+
+# Archivo de requisitos del entorno local (puede tener versiones específicas)
+requirements-local.txt
+
+# Archivos de pip-tools
+requirements.in
+
+# ==============================================================================
+# SISTEMAS OPERATIVOS
+# ==============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==============================================================================
+# DOCUMENTACIÓN Y REPORTES
+# ==============================================================================
+
+# Documentación generada automáticamente
+docs/_build/
+docs/build/
+
+# Reportes y métricas
+reports/
+metrics/
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# ==============================================================================
+# SEGURIDAD Y CLAVES
+# ==============================================================================
+
+# Claves SSH, certificados y otros archivos de seguridad
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+known_hosts
+
+# Archivos de configuración con claves secretas
+secrets.json
+secrets.yml
+secrets.yaml
+private_settings.py
+production_settings.py
+
+# ==============================================================================
+# BACKUPS Y ARCHIVOS GRANDES
+# ==============================================================================
+
+# Archivos de backup
+*.backup
+*.bak
+*.tmp
+*.temp
+
+# Archivos grandes que no deberían estar en git
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# ==============================================================================
+# DESARROLLO LOCAL
+# ==============================================================================
+
+# Archivos específicos del desarrollo local
+local_dev.py
+dev_settings.py
+test_settings.py
+
+# Base de datos de prueba
+test_db.sqlite3
+test_*.sqlite3
+
+# Scripts de prueba
+populate_catalog.py
+
+# Archivos específicos de desarrollo local
+Backend/test_db.py
+Backend/create_superuser.py
+Backend/DJANGO_ADMIN_README.md
+
+# ==============================================================================
+# EXCEPCIONES (ARCHIVOS QUE SÍ SE INCLUYEN)
+# ==============================================================================
+
+# Mantener estos archivos aunque coincidan con patrones anteriores
+!README.md
+!.gitignore
+!requirements.txt
+!requirements.example.txt
+!.env.example
+!package.json
+!package-lock.json
+!yarn.lock
+
+# Mantener ejemplos de configuración
+!.env.example
+!config.example.py
+!settings.example.py
+
+# Mantener documentación importante
+!docs/
+!*.md
+!LICENSE
