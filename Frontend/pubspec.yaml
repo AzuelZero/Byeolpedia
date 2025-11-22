@@ -1,5 +1,5 @@
 name: byeolpedia_frontend
-description: "Frontend de Byeolpedia"
+description: "Byeolpedia - Kpop Tracker MVP"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.10.0
+  sdk: ^3.10.1
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,29 +35,25 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   
-  # Gestión de estado reactiva según especificación TFG
-  flutter_riverpod: ^2.5.1
+  # HTTP client for API calls
+  dio: ^5.6.0
   
-  # HTTP client avanzado con interceptores según especificación TFG
-  dio: ^5.4.3+1
+  # State management
+  provider: ^6.1.2
   
-  # Almacenamiento seguro para tokens de autenticación
-  flutter_secure_storage: ^9.0.0
+  # JSON annotation for serialization
+  json_annotation: ^4.9.0
   
-  # Persistencia local para funcionamiento offline y caché
-  sqflite: ^2.3.3+2
+  # Local storage
+  shared_preferences: ^2.3.2
   
-  # Para imágenes caché
+  # Navigation
+  go_router: ^14.2.7
+  
+  # Image caching
   cached_network_image: ^3.3.1
   
-  # Para navegación
-  go_router: ^14.2.0
-  
-  # Para internacionalización (i18n)
-  flutter_localizations:
-    sdk: flutter
-  
-  # Para reconocimiento visual (TensorFlow Lite)
+  # TensorFlow Lite for ML functionality
   tflite_flutter: ^0.10.4
 
 dev_dependencies:
@@ -70,6 +66,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  
+  # JSON code generation
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.12
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
