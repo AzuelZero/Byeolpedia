@@ -19,7 +19,29 @@ from django.urls import path, include
 from .admin import admin_site
 from rest_framework_simplejwt.views import TokenRefreshView
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+@api_view(['GET'])
+def home_view(request):
+    """Vista principal de la API"""
+    return Response({
+        'message': 'Bienvenido a Byeolpedia API',
+        'version': '1.0.0',
+        'endpoints': {
+            'auth': '/api/auth/',
+            'catalog': '/api/catalog/',
+            'collection': '/api/collection/',
+            'admin': '/admin/',
+            'docs': '/api/docs/'
+        }
+    }, status=status.HTTP_200_OK)
+
 urlpatterns = [
+    # Página principal
+    path('', home_view, name='home'),
+    
     # Admin
     path('admin/', admin.site.urls),  # Admin por defecto
     path('byeolpedia-admin/', admin_site.urls),  # Admin personalizado

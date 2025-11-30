@@ -1,124 +1,132 @@
 @echo off
 REM ==============================================================================
-REM BYEOLPEDIA - SCRIPT DE CONFIGURACIÓN INICIAL (WINDOWS)
+REM BYEOLPEDIA - SCRIPT ORQUESTADOR DE CONFIGURACIÓN (WINDOWS)
 REM ==============================================================================
 REM
-REM Este script automatiza la configuración inicial del proyecto Byeolpedia.
-REM Ejecútalo una vez después de clonar el repositorio.
+REM Este script coordina la instalación del proyecto completo (Backend + Frontend).
+REM Puedes ejecutarlo desde la raíz para instalar TODO, o navegar a Backend/Frontend
+REM para instalar solo lo que necesites.
 REM
 REM USO:
 REM   setup.bat
 REM
 REM ==============================================================================
 
-echo 🚀 Iniciando configuraci�n de Byeolpedia...
+setlocal enabledelayedexpansion
 
 REM Verificar si estamos en el directorio correcto
 if not exist "Backend\manage.py" (
-    echo ❌ Error: No se encuentra Backend\manage.py. Aseg�rate de ejecutar este script desde la ra�z del proyecto.
+    echo ❌ Error: No se encuentra Backend\manage.py
+    echo Asegúrate de ejecutar este script desde la raíz del proyecto.
     pause
     exit /b 1
 )
 
-REM Verificar si Python está instalado
-python --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo ❌ Error: Python no est� instalado. Por favor, inst�lalo antes de continuar.
-    pause
-    exit /b 1
-)
+echo 🚀 Iniciando configuración de Byeolpedia...
+echo.
 
-REM Verificar si pip está instalado
-pip --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo ❌ Error: pip no est� instalado. Por favor, inst�lalo antes de continuar.
-    pause
-    exit /b 1
-)
+REM ==============================================================================
+REM PARTE 1: CONFIGURAR BACKEND
+REM ==============================================================================
 
-echo ✅ Verificaciones iniciales completadas.
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+echo PARTE 1: Configurando Backend
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+echo.
 
-REM Crear entorno virtual si no existe
-if not exist "venv" (
-    echo 📦 Creando entorno virtual...
-    python -m venv venv
+if exist "Backend\setup.bat" (
+    call Backend\setup.bat
     if %errorlevel% neq 0 (
-        echo ❌ Error al crear el entorno virtual.
+        echo ❌ Backend falló durante la configuración
         pause
         exit /b 1
     )
-    echo ✅ Entorno virtual creado.
+    echo ✅ Backend configurado correctamente
 ) else (
-    echo ✅ El entorno virtual ya existe.
-)
-
-REM Activar entorno virtual
-echo 🔄 Activando entorno virtual...
-call venv\Scripts\activate.bat
-if %errorlevel% neq 0 (
-    echo ❌ Error al activar el entorno virtual.
+    echo ❌ No se encontró Backend\setup.bat
     pause
     exit /b 1
 )
-echo ✅ Entorno virtual activado.
-
-REM Instalar dependencias
-echo 📥 Instalando dependencias de Python...
-cd Backend
-pip install -r requirements.txt
-if %errorlevel% neq 0 (
-    echo ❌ Error al instalar las dependencias.
-    pause
-    exit /b 1
-)
-echo ✅ Dependencias instaladas.
-
-REM Verificar si existe .env, si no, crearlo desde .env.example
-if not exist ".env" (
-    echo 📝 Creando archivo .env desde .env.example...
-    copy .env.example .env >nul
-    if %errorlevel% neq 0 (
-        echo ❌ Error al crear el archivo .env.
-        pause
-        exit /b 1
-    )
-    echo ✅ Archivo .env creado.
-    echo ⚠️  IMPORTANTE: Debes editar el archivo Backend\.env y configurar tus variables de entorno.
-    echo    - Genera una SECRET_KEY con: python manage.py shell
-    echo    - Ejecuta: from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())
-) else (
-    echo ✅ El archivo .env ya existe.
-)
-
-REM Ejecutar migraciones
-echo 🗄️  Ejecutando migraciones de la base de datos...
-python manage.py migrate
-if %errorlevel% neq 0 (
-    echo ❌ Error al ejecutar las migraciones.
-    pause
-    exit /b 1
-)
-echo ✅ Migraciones completadas.
-
-REM Preguntar si desea crear un superusuario
-set /p create_superuser="Deseas crear un superusuario para el panel de admin? (y/n): "
-if /i "%create_superuser%"=="y" (
-    python manage.py createsuperuser
-)
-
-REM Volver al directorio raíz
-cd ..
 
 echo.
-echo 🎉 Configuración completada con éxito!
+
+REM ==============================================================================
+REM PARTE 2: CONFIGURAR FRONTEND (OPCIONAL)
+REM ==============================================================================
+
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+echo PARTE 2: Configurando Frontend (Opcional)
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+echo.
+
+if exist "Frontend" (
+    if exist "Frontend\setup.bat" (
+        set /p frontend_setup="¿Deseas configurar el Frontend también? (y/n): "
+        
+        if /i "!frontend_setup!"=="y" (
+            REM Verificar si Flutter está instalado
+            flutter --version >nul 2>&1
+            if %errorlevel% neq 0 (
+                echo ⚠️  Flutter no está instalado en tu sistema
+                echo Instálalo desde: https://flutter.dev/docs/get-started/install
+                echo ⚠️  Omitiendo configuración del Frontend por ahora
+            ) else (
+                call Frontend\setup.bat
+                if %errorlevel% neq 0 (
+                    echo ⚠️  Frontend falló, pero Backend está funcionando
+                    echo Puedes configurar Frontend más tarde con: cd Frontend ^&^& setup.bat
+                ) else (
+                    echo ✅ Frontend configurado correctamente
+                )
+            )
+        ) else (
+            echo ⚠️  Frontend omitido. Puedes configurarlo después con: cd Frontend ^&^& setup.bat
+        )
+    ) else (
+        echo ⚠️  Frontend no está disponible aún (estado: Próximamente)
+    )
+) else (
+    echo ⚠️  Carpeta Frontend no existe
+)
+
+echo.
+
+REM ==============================================================================
+REM FINALIZACIÓN
+REM ==============================================================================
+
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+echo FINALIZACIÓN
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+echo.
+
+echo ✅ ¡Configuración completada!
 echo.
 echo 📋 Próximos pasos:
-echo    1. Si aún no lo has hecho, edita Backend\.env con tus variables de entorno
-echo    2. Activa el entorno virtual con: venv\Scripts\activate
-echo    3. Inicia el servidor de desarrollo con: cd Backend && python manage.py runserver
-echo    4. Accede a la API en: http://localhost:8000/
-echo    5. Accede al panel de administración en: http://localhost:8000/admin/
 echo.
-echo 📚 Para más información, consulta el archivo README.md
+echo 1️⃣  Activa el entorno virtual del Backend:
+echo    venv\Scripts\activate
 echo.
+echo 2️⃣  Inicia el servidor de desarrollo:
+echo    cd Backend ^&^& python manage.py runserver
+echo.
+echo 3️⃣  Accede a la API:
+echo    http://localhost:8000/
+echo.
+echo 4️⃣  Panel de administración:
+echo    http://localhost:8000/admin/
+echo.
+
+if exist "Frontend" (
+    echo 5️⃣  Para iniciar el Frontend (cuando esté listo):
+    echo    cd Frontend ^&^& flutter run
+    echo.
+)
+
+echo 📚 Para más información:
+echo    Backend: Backend\README.md
+echo    Frontend: Frontend\README.md
+echo    General: README.md
+echo.
+
 pause

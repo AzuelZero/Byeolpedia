@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/login_form.dart';
+import '../widgets/register_form.dart';
 import '../../../shared/providers/theme_provider.dart';
 import '../../../app/theme/colors.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Tu tracker de K-Pop',
+                        'Crea tu cuenta',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.white.withValues(alpha: 0.8),
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 60),
                 
-                // Formulario de login
+                // Formulario de registro
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(24.0),
-                      child: LoginForm(),
+                      child: RegisterForm(),
                     ),
                   ),
                 ),

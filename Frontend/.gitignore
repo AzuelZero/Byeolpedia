@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Test files
+test_connection.html
+build/web/connection_test.js
+build/web/test_runner.html
+build/web/test_runner_fixed.html
+build/web/test_runner_simple.html
+build/web/debug_test.html

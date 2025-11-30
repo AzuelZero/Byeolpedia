@@ -8,8 +8,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:byeolpedia_frontend/main.dart';
+import 'package:byeolpedia_frontend/app/app.dart';
 import 'package:byeolpedia_frontend/data/services/auth_service.dart';
+import 'package:byeolpedia_frontend/shared/providers/theme_provider.dart';
 
 void main() {
   testWidgets('Byeolpedia app smoke test', (WidgetTester tester) async {
@@ -18,8 +19,11 @@ void main() {
     
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      ChangeNotifierProvider<AuthService>(
-        create: (context) => authService,
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AuthService>(create: (context) => authService),
+          ChangeNotifierProvider<ThemeProvider>(create: (context) => ThemeProvider()),
+        ],
         child: const ByeolpediaApp(),
       ),
     );

@@ -12,7 +12,7 @@ class UserCollectibleFilter(django_filters.FilterSet):
     
     class Meta:
         model = UserCollectible
-        fields = ['collectible_type', 'condition', 'is_duplicate']
+        fields = ['collectible_type', 'source']
 
 
 class WishlistItemFilter(django_filters.FilterSet):
