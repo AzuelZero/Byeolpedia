@@ -1,27 +1,87 @@
 # Byeolpedia - Kpop Tracker MVP
 
-Byeolpedia es una aplicación para seguimiento de grupos de kpop, álbumes,
-photocards y lightsticks. Este proyecto consiste en un backend con Django REST
-API y un frontend con Flutter.
+Byeolpedia es una aplicación integral para seguimiento y gestión de colecciones de kpop,
+incluyendo grupos, álbumes, photocards y lightsticks. Este proyecto combina un backend
+con Django REST API y un frontend con Flutter, incorporando reconocimiento de imágenes
+con TensorFlow Lite para identificar photocards y lightsticks automáticamente.
 
-## 🚀 Configuración Rápida
+## 🚀 Instalación Automatizada
 
 ### Requisitos Previos
 
 - Python 3.8+
 - pip y virtualenv
 - Git
+- Flutter (solo para el frontend)
 
-### Instalación
+### Instalación con un solo comando
 
-1. **Clona el repositorio**
+Hemos creado scripts automatizados para configurar todo el proyecto de forma sencilla:
 
+#### Para Windows:
+
+```bash
+git clone https://github.com/tu-usuario/byeolpedia.git
+cd byeolpedia
+setup.bat
+```
+
+#### Para macOS/Linux:
+
+```bash
+git clone https://github.com/tu-usuario/byeolpedia.git
+cd byeolpedia
+chmod +x setup.sh
+./setup.sh
+```
+
+Estos scripts realizarán automáticamente:
+- ✅ Creación del entorno virtual
+- ✅ Instalación de dependencias de Python
+- ✅ Configuración de variables de entorno (.env)
+- ✅ Generación automática de SECRET_KEY
+- ✅ Ejecución de migraciones de la base de datos
+- ✅ Opción para crear superusuario
+- ✅ Configuración del frontend (opcional)
+
+### Pasos posteriores a la instalación
+
+Una vez completada la instalación automatizada:
+
+1. **Activa el entorno virtual** (si no está activado):
    ```bash
-   git clone https://github.com/tu-usuario/byeolpedia.git
-   cd byeolpedia
+   # Windows
+   venv\Scripts\activate
+   
+   # macOS/Linux
+   source venv/bin/activate
    ```
 
-2. **Crea y activa un entorno virtual**
+2. **Inicia el servidor backend**:
+   ```bash
+   cd Backend
+   python manage.py runserver
+   ```
+
+3. **Inicia el frontend** (si lo configuraste):
+   ```bash
+   cd Frontend
+   flutter run
+   ```
+
+### Acceso a la aplicación
+
+- **API Backend**: http://localhost:8000/
+- **Panel de administración**: http://localhost:8000/admin/
+- **Frontend Flutter**: Se ejecutará en tu dispositivo/emulador o navegador
+
+## 🔧 Instalación Manual (Opcional)
+
+Si prefieres realizar la instalación manualmente o necesitas más control sobre el proceso:
+
+### Backend
+
+1. **Crea y activa un entorno virtual**
 
    ```bash
    # Windows
@@ -33,14 +93,14 @@ API y un frontend con Flutter.
    source venv/bin/activate
    ```
 
-3. **Instala las dependencias**
+2. **Instala las dependencias**
 
    ```bash
    cd Backend
    pip install -r requirements.txt
    ```
 
-4. **Configura las variables de entorno**
+3. **Configura las variables de entorno**
 
    ```bash
    # Copia el archivo de ejemplo
@@ -50,7 +110,7 @@ API y un frontend con Flutter.
    # ¡NO SUBAS ESTE ARCHIVO A GIT!
    ```
 
-5. **Genera una clave secreta para Django**
+4. **Genera una clave secreta para Django**
 
    ```bash
    python manage.py shell
@@ -60,26 +120,45 @@ API y un frontend con Flutter.
 
    Copia esta clave en tu archivo `.env` en la variable `SECRET_KEY`.
 
-6. **Ejecuta las migraciones de la base de datos**
+5. **Ejecuta las migraciones de la base de datos**
 
    ```bash
    python manage.py migrate
    ```
 
-7. **Crea un superusuario (opcional)**
+6. **Crea un superusuario (opcional)**
 
    ```bash
    python manage.py createsuperuser
    ```
 
-8. **Inicia el servidor de desarrollo**
+7. **Inicia el servidor de desarrollo**
 
    ```bash
    python manage.py runserver
    ```
 
-La API estará disponible en `http://localhost:8000/` y el panel de administración
-en `http://localhost:8000/admin/`.
+### Frontend
+
+1. **Asegúrate de tener Flutter instalado**
+   - Descarga desde: https://flutter.dev/docs/get-started/install
+
+2. **Instala las dependencias**
+
+   ```bash
+   cd Frontend
+   flutter pub get
+   ```
+
+3. **Ejecuta la aplicación**
+
+   ```bash
+   # En emulador/dispositivo
+   flutter run
+   
+   # En navegador
+   flutter run -d chrome
+   ```
 
 ## 🔐 Configuración de Variables de Entorno
 
@@ -89,7 +168,7 @@ claves secretas, credenciales de base de datos, etc.
 ### Archivos Importantes
 
 - **`.env.example`**: Plantilla con las variables necesarias.
-- **`.env`**: Configuración personal con valores reales.
+- **`.env`**: Configuración personal con valores reales (generado automáticamente por el script de instalación).
 
 ### Variables Obligatorias
 
@@ -100,6 +179,8 @@ SECRET_KEY=tu-clave-secreta-generada-aqui
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 ```
+
+> **Nota**: El script de instalación genera automáticamente la `SECRET_KEY` y crea el archivo `.env` por ti.
 
 ### Variables Opcionales
 
@@ -120,11 +201,11 @@ Dependiendo de tu configuración, puedes necesitar estas variables adicionales:
 - **Django Filters**: Filtrado avanzado de resultados
 - **TensorFlow Lite**: Integración para reconocimiento de imágenes
 
-### Frontend (Próximamente)
+### Frontend
 - **Flutter**: Framework multiplataforma para el frontend
 - **TensorFlow Lite**: Ejecución de modelos de ML en el dispositivo
-- **Provider**: Gestión de estado
-- **HTTP**: Cliente para comunicaciones API
+- **Provider**: Gestión de estado reactiva con ChangeNotifier para manejar el estado de la aplicación de manera eficiente y escalable
+- **Dio**: Cliente HTTP robusto para comunicaciones API con soporte para interceptores, timeout y manejo de errores
 
 ### DevOps
 - **Docker**: Contenerización (opcional)
@@ -146,18 +227,35 @@ byeolpedia/
 │   │   └── serializers.py     # Serializers de usuarios
 │   ├── manage.py              # Script de gestión de Django
 │   ├── requirements.txt       # Dependencias de Python
+│   ├── setup.bat              # Script de configuración para Windows
+│   ├── setup.sh               # Script de configuración para Unix
 │   └── README.md              # Documentación del backend
-├── Frontend/                  # Frontend Flutter (pendiente)
+├── Frontend/                  # Frontend Flutter
+│   ├── lib/                   # Código fuente de la aplicación
+│   │   ├── app/               # Configuración principal de la app
+│   │   ├── core/              # Utilidades y configuración global
+│   │   ├── features/          # Módulos de funcionalidades
+│   │   ├── shared/            # Componentes compartidos
+│   │   └── main.dart          # Punto de entrada
+│   ├── assets/                # Recursos (imágenes, fuentes, etc.)
+│   ├── android/               # Configuración para Android
+│   ├── ios/                   # Configuración para iOS
+│   ├── pubspec.yaml           # Dependencias y configuración
+│   ├── setup.bat              # Script de configuración para Windows
+│   ├── setup.sh               # Script de configuración para Unix
+│   └── README.md              # Documentación del frontend
 ├── .env.example               # Plantilla de variables de entorno
 ├── .gitignore                 # Archivos excluidos de Git
 ├── LICENSE                    # Licencia del proyecto
 ├── Logo App.png              # Logo de la aplicación
 ├── README.md                  # Este archivo
-├── setup.bat                  # Script de configuración para Windows
-└── setup.sh                   # Script de configuración para Unix
+├── setup.bat                  # Script orquestador para Windows
+└── setup.sh                   # Script orquestador para Unix
 ```
 
-### Comandos Útiles
+## 📚 Comandos Útiles
+
+### Backend
 
 ```bash
 # Crear nuevas migraciones después de cambiar modelos
@@ -174,6 +272,31 @@ python manage.py collectstatic
 
 # Iniciar shell de Django
 python manage.py shell
+
+# Crear superusuario
+python manage.py createsuperuser
+```
+
+### Frontend
+
+```bash
+# Obtener dependencias
+flutter pub get
+
+# Limpiar compilación anterior
+flutter clean
+
+# Ejecutar en modo depuración
+flutter run
+
+# Ejecutar en navegador web
+flutter run -d chrome
+
+# Compilar APK para Android
+flutter build apk
+
+# Compilar para iOS
+flutter build ios
 ```
 
 ## 🚀 Despliegue
@@ -195,6 +318,80 @@ DEBUG=False
 ALLOWED_HOSTS=byeolpedia.com,www.byeolpedia.com
 SECURE_SSL_REDIRECT=True
 ```
+
+## 🔧 Solución de Problemas (Troubleshooting)
+
+### Problemas Comunes
+
+#### El script de instalación falla
+
+1. **Asegúrate de tener los requisitos previos instalados**:
+   - Python 3.8+ con pip
+   - Git
+   - Flutter (solo para frontend)
+
+2. **Permisos en Linux/macOS**:
+   ```bash
+   chmod +x setup.sh
+   chmod +x Backend/setup.sh
+   chmod +x Frontend/setup.sh
+   ```
+
+3. **Problemas con el entorno virtual**:
+   ```bash
+   # Eliminar entorno virtual existente y recrear
+   rm -rf venv
+   cd Backend && python -m venv ../venv
+   ```
+
+#### Error de SECRET_KEY
+
+Si el script no puede generar la SECRET_KEY automáticamente:
+
+```bash
+# Generar manualmente
+python manage.py shell
+>>> from django.core.management.utils import get_random_secret_key
+>>> print(get_random_secret_key())
+```
+
+Luego edita el archivo `Backend/.env` y reemplaza `tu-clave-secreta-generada-aqui` con la clave generada.
+
+#### Problemas con Flutter
+
+1. **Flutter no encontrado**:
+   - Asegúrate de que Flutter esté en tu PATH
+   - Reinicia tu terminal después de instalar Flutter
+
+2. **Dependencias de Flutter**:
+   ```bash
+   cd Frontend
+   flutter doctor
+   flutter pub get
+   ```
+
+#### Problemas con la base de datos
+
+```bash
+# Si las migraciones fallan
+cd Backend
+python manage.py migrate --fake-initial
+python manage.py migrate
+```
+
+### Obtener Ayuda
+
+Si encuentras problemas no cubiertos aquí:
+
+1. Revisa los README específicos:
+   - [`Backend/README.md`](Backend/README.md) para problemas del backend
+   - [`Frontend/README.md`](Frontend/README.md) para problemas del frontend
+
+2. Crea un issue en el repositorio con:
+   - Descripción detallada del problema
+   - Sistema operativo y versión
+   - Versión de Python/Flutter
+   - Mensaje de error completo
 
 ## 📝 Contribuir
 
