@@ -1,8 +1,9 @@
 # Byeolpedia - Kpop Tracker MVP
 
-Byeolpedia es una aplicación para seguimiento de grupos de kpop, álbumes,
-photocards y lightsticks. Este proyecto consiste en un backend con Django REST
-API y un frontend con Flutter.
+Byeolpedia es una aplicación integral para seguimiento y gestión de colecciones de kpop,
+incluyendo grupos, álbumes, photocards y lightsticks. Este proyecto combina un backend
+con Django REST API y un frontend con Flutter, incorporando reconocimiento de imágenes
+con TensorFlow Lite para identificar photocards y lightsticks automáticamente.
 
 ## 🚀 Instalación Automatizada
 
