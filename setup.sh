@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # ==============================================================================
-# BYEOLPEDIA - SCRIPT DE CONFIGURACIÓN INICIAL
+# BYEOLPEDIA - SCRIPT ORQUESTADOR DE CONFIGURACIÓN
 # ==============================================================================
 #
-# Este script automatiza la configuración inicial del proyecto Byeolpedia.
-# Ejecútalo una vez después de clonar el repositorio.
+# Este script coordina la instalación del proyecto completo (Backend + Frontend).
+# Puedes ejecutarlo desde la raíz para instalar TODO, o navegar a Backend/Frontend
+# para instalar solo lo que necesites.
 #
 # USO:
 #   chmod +x setup.sh
@@ -13,105 +14,131 @@
 #
 # ==============================================================================
 
-echo "🚀 Iniciando configuración de Byeolpedia..."
+set -e  # Salir si hay error
+
+# Colores para output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}🚀 Iniciando configuración de Byeolpedia...${NC}"
+echo ""
 
 # Verificar si estamos en el directorio correcto
 if [ ! -f "Backend/manage.py" ]; then
-    echo "❌ Error: No se encuentra Backend/manage.py. Asegúrate de ejecutar este script desde la raíz del proyecto."
+    echo -e "${RED}❌ Error: No se encuentra Backend/manage.py${NC}"
+    echo "Asegúrate de ejecutar este script desde la raíz del proyecto."
     exit 1
 fi
 
-# Verificar si Python está instalado
-if ! command -v python3 &> /dev/null; then
-    echo "❌ Error: Python 3 no está instalado. Por favor, instálalo antes de continuar."
-    exit 1
-fi
+# Función para imprimir secciones
+print_section() {
+    echo ""
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BLUE}$1${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+}
 
-# Verificar si pip está instalado
-if ! command -v pip &> /dev/null; then
-    echo "❌ Error: pip no está instalado. Por favor, instálalo antes de continuar."
-    exit 1
-fi
+# Función para imprimir éxito
+print_success() {
+    echo -e "${GREEN}✅ $1${NC}"
+}
 
-echo "✅ Verificaciones iniciales completadas."
+# Función para imprimir advertencia
+print_warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
 
-# Crear entorno virtual si no existe
-if [ ! -d "venv" ]; then
-    echo "📦 Creando entorno virtual..."
-    python3 -m venv venv
-    if [ $? -ne 0 ]; then
-        echo "❌ Error al crear el entorno virtual."
+# Función para imprimir error
+print_error() {
+    echo -e "${RED}❌ $1${NC}"
+}
+
+# ==============================================================================
+# PARTE 1: CONFIGURAR BACKEND
+# ==============================================================================
+
+print_section "PARTE 1: Configurando Backend"
+
+if [ -f "Backend/setup.sh" ]; then
+    chmod +x Backend/setup.sh
+    if Backend/setup.sh; then
+        print_success "Backend configurado correctamente"
+    else
+        print_error "Backend falló durante la configuración"
         exit 1
     fi
-    echo "✅ Entorno virtual creado."
 else
-    echo "✅ El entorno virtual ya existe."
-fi
-
-# Activar entorno virtual
-echo "🔄 Activando entorno virtual..."
-source venv/bin/activate
-if [ $? -ne 0 ]; then
-    echo "❌ Error al activar el entorno virtual."
+    print_error "No se encontró Backend/setup.sh"
     exit 1
 fi
-echo "✅ Entorno virtual activado."
 
-# Instalar dependencias
-echo "📥 Instalando dependencias de Python..."
-cd Backend
-pip install -r requirements.txt
-if [ $? -ne 0 ]; then
-    echo "❌ Error al instalar las dependencias."
-    exit 1
-fi
-echo "✅ Dependencias instaladas."
+# ==============================================================================
+# PARTE 2: CONFIGURAR FRONTEND (OPCIONAL)
+# ==============================================================================
 
-# Verificar si existe .env, si no, crearlo desde .env.example
-if [ ! -f ".env" ]; then
-    echo "📝 Creando archivo .env desde .env.example..."
-    cp .env.example .env
-    if [ $? -ne 0 ]; then
-        echo "❌ Error al crear el archivo .env."
-        exit 1
+print_section "PARTE 2: Configurando Frontend (Opcional)"
+
+if [ -d "Frontend" ] && [ -f "Frontend/setup.sh" ]; then
+    read -p "¿Deseas configurar el Frontend también? (y/n): " -n 1 -r
+    echo
+    
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # Verificar si Flutter está instalado antes de correr el setup
+        if ! command -v flutter &> /dev/null; then
+            print_warning "Flutter no está instalado en tu sistema"
+            print_warning "Instálalo desde: https://flutter.dev/docs/get-started/install"
+            print_warning "Omitiendo configuración del Frontend por ahora"
+        else
+            chmod +x Frontend/setup.sh
+            if Frontend/setup.sh; then
+                print_success "Frontend configurado correctamente"
+            else
+                print_warning "Frontend falló, pero Backend está funcionando"
+                echo "Puedes configurar Frontend más tarde con: cd Frontend && ./setup.sh"
+            fi
+        fi
+    else
+        print_warning "Frontend omitido. Puedes configurarlo después con: cd Frontend && ./setup.sh"
     fi
-    echo "✅ Archivo .env creado."
-    echo "⚠️  IMPORTANTE: Debes editar el archivo Backend/.env y configurar tus variables de entorno."
-    echo "   - Genera una SECRET_KEY con: python manage.py shell"
-    echo "   - Ejecuta: from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 else
-    echo "✅ El archivo .env ya existe."
+    print_warning "Frontend no está disponible aún (estado: Próximamente)"
 fi
 
-# Ejecutar migraciones
-echo "🗄️  Ejecutando migraciones de la base de datos..."
-python manage.py migrate
-if [ $? -ne 0 ]; then
-    echo "❌ Error al ejecutar las migraciones."
-    exit 1
+# ==============================================================================
+# FINALIZACIÓN
+# ==============================================================================
+
+print_section "FINALIZACIÓN"
+
+echo ""
+print_success "¡Configuración completada!"
+echo ""
+echo -e "${BLUE}📋 Próximos pasos:${NC}"
+echo ""
+echo "1️⃣  Activa el entorno virtual del Backend:"
+echo -e "   ${YELLOW}source venv/bin/activate${NC}"
+echo ""
+echo "2️⃣  Inicia el servidor de desarrollo:"
+echo -e "   ${YELLOW}cd Backend && python manage.py runserver${NC}"
+echo ""
+echo "3️⃣  Accede a la API:"
+echo -e "   ${YELLOW}http://localhost:8000/${NC}"
+echo ""
+echo "4️⃣  Panel de administración:"
+echo -e "   ${YELLOW}http://localhost:8000/admin/${NC}"
+echo ""
+
+if [ -d "Frontend" ]; then
+    echo "5️⃣  Para iniciar el Frontend (cuando esté listo):"
+    echo -e "   ${YELLOW}cd Frontend && flutter run${NC}"
+    echo ""
 fi
-echo "✅ Migraciones completadas."
 
-# Preguntar si desea crear un superusuario
-echo ""
-read -p "¿Deseas crear un superusuario para el panel de administración? (y/n): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    python manage.py createsuperuser
-fi
-
-# Volver al directorio raíz
-cd ..
-
-echo ""
-echo "🎉 ¡Configuración completada con éxito!"
-echo ""
-echo "📋 Próximos pasos:"
-echo "   1. Si aún no lo has hecho, edita Backend/.env con tus variables de entorno"
-echo "   2. Activa el entorno virtual con: source venv/bin/activate"
-echo "   3. Inicia el servidor de desarrollo con: cd Backend && python manage.py runserver"
-echo "   4. Accede a la API en: http://localhost:8000/"
-echo "   5. Accede al panel de administración en: http://localhost:8000/admin/"
-echo ""
-echo "📚 Para más información, consulta el archivo README.md"
+echo -e "${BLUE}📚 Para más información:${NC}"
+echo "   Backend: Backend/README.md"
+echo "   Frontend: Frontend/README.md"
+echo "   General: README.md"
 echo ""

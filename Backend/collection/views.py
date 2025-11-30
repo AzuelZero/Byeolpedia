@@ -116,14 +116,9 @@ def collection_stats_view(request):
         total=Sum('purchase_price')
     )['total'] or 0
     
-    # Duplicados
-    duplicate_photocards = UserCollectible.objects.filter(
-        user=user, collectible_type='photocard', is_duplicate=True
-    ).count()
-    
-    duplicate_lightsticks = UserCollectible.objects.filter(
-        user=user, collectible_type='lightstick', is_duplicate=True
-    ).count()
+    # Duplicados (por ahora no implementado)
+    duplicate_photocards = 0
+    duplicate_lightsticks = 0
     
     # Wishlist y favoritos
     wishlist_items = WishlistItem.objects.filter(user=user).count()

@@ -311,3 +311,9 @@ Backend/DJANGO_ADMIN_README.md
 !docs/
 !*.md
 !LICENSE
+
+# Documentación privada (solo para desarrollo local)
+CONEXION_FRONTEND_BACKEND.md
+
+# Scripts de desarrollo local
+check_connection.py

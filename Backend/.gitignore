@@ -1,0 +1,92 @@
+# Archivos de prueba
+test_*.json
+api_test_*.py
+test_credentials.py
+API_USAGE.md
+
+# Base de datos
+db.sqlite3
+
+# Archivos de logs
+debug.log
+
+# Archivos de medios
+media/
+
+# Archivos estáticos
+staticfiles/
+
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Archivos de configuración sensibles
+.env
+
+# Archivos de compilación de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribuciones de Python
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json

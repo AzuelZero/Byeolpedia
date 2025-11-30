@@ -24,7 +24,7 @@ urlpatterns = [
     # Estadísticas
     path('stats/', views.collection_stats_view, name='stats'),
     
-    # Machine Learning
-    path('lightstick-recognition/', views.LightstickRecognitionView.as_view(), name='lightstick-recognition'),
-    path('lightstick-recognition/info/', views.LightstickRecognitionInfoView.as_view(), name='lightstick-recognition-info'),
+    # Machine Learning (comentado hasta que las vistas estén implementadas)
+    # path('lightstick-recognition/', views.LightstickRecognitionView.as_view(), name='lightstick-recognition'),
+    # path('lightstick-recognition/info/', views.LightstickRecognitionInfoView.as_view(), name='lightstick-recognition-info'),
 ]

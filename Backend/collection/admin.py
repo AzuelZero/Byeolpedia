@@ -4,9 +4,9 @@ from .models import UserCollectible, WishlistItem, UserFavoriteGroup
 
 @admin.register(UserCollectible)
 class UserCollectibleAdmin(admin.ModelAdmin):
-    list_display = ('user', 'get_collectible_name', 'collectible_type', 'source', 'acquisition_date', 'purchase_price', 'condition')
+    list_display = ('user', 'get_collectible_name', 'collectible_type', 'source', 'acquisition_date', 'purchase_price')
     search_fields = ('user__username', 'user__collector_name', 'source')
-    list_filter = ('collectible_type', 'condition', 'acquisition_date', 'is_duplicate')
+    list_filter = ('collectible_type', 'acquisition_date')
     ordering = ('-acquisition_date',)
     readonly_fields = ('id', 'added_at')
     
