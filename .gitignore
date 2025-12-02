@@ -314,6 +314,7 @@ Backend/DJANGO_ADMIN_README.md
 
 # Documentación privada (solo para desarrollo local)
 CONEXION_FRONTEND_BACKEND.md
+API_INTERNAL.md
 
 # Scripts de desarrollo local
 check_connection.py
