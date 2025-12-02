@@ -47,11 +47,12 @@ urlpatterns = [
     path('byeolpedia-admin/', admin_site.urls),  # Admin personalizado
     
     # API REST
+    path('api/', home_view, name='api-root'),  # Raíz de la API
     path('api/auth/', include('users.urls')),  # Autenticación y usuarios
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Refresh token
     path('api/catalog/', include('catalog.urls')),  # Catálogo de productos
     path('api/collection/', include('collection.urls')),  # Colección personal
     
     # API Root (opcional, para documentación)
-    path('api/', include('rest_framework.urls')),
+    # path('api/', include('rest_framework.urls')),
 ]
