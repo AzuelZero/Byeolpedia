@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../features/auth/screens/login_screen.dart';
 import '../../features/auth/screens/register_screen.dart';
-import '../../features/common/screens/home_screen.dart'; // Assuming MainScreen is here
+// Assuming MainScreen is here
 import '../app.dart';
 
 class AppRouter {

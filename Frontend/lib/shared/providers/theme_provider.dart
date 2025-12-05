@@ -49,7 +49,6 @@ class ThemeProvider extends ChangeNotifier {
         themeString = 'dark';
         break;
       case ThemeMode.system:
-      default:
         themeString = 'system';
         break;
     }
@@ -67,7 +66,6 @@ class ThemeProvider extends ChangeNotifier {
         await setThemeMode(ThemeMode.light);
         break;
       case ThemeMode.system:
-      default:
         await setThemeMode(ThemeMode.light);
         break;
     }
