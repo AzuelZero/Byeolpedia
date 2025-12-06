@@ -1,4 +1,4 @@
-# Byeolpedia - Kpop Tracker MVP
+# Byeolpedia 0.5 - Kpop Tracker MVP
 
 Byeolpedia es una aplicación integral para seguimiento y gestión de colecciones de kpop,
 incluyendo grupos, álbumes, photocards y lightsticks. Este proyecto combina un backend
