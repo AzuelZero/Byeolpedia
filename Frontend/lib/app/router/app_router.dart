@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../features/auth/screens/login_screen.dart';
 import '../../features/auth/screens/register_screen.dart';
-import '../../features/common/screens/home_screen.dart'; // Assuming MainScreen is here
+import '../../features/settings/presentation/pages/settings_screen.dart';
+import '../../features/collection/presentation/pages/add_album_screen.dart';
+import '../../features/collection/presentation/pages/add_photocard_screen.dart';
+import '../../features/collection/presentation/pages/add_lightstick_screen.dart';
+// Assuming MainScreen is here
 import '../app.dart';
 
 class AppRouter {
@@ -13,6 +17,10 @@ class AppRouter {
   static const String search = '/search';
   static const String community = '/community';
   static const String lightstickRecognition = '/lightstick';
+  static const String settingsRoute = '/settings';
+  static const String addAlbum = '/add-album';
+  static const String addPhotocard = '/add-photocard';
+  static const String addLightstick = '/add-lightstick';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -32,6 +40,14 @@ class AppRouter {
         return _buildPageRoute(const MainScreen(initialIndex: 3), settings);
       case profile:
         return _buildPageRoute(const MainScreen(initialIndex: 4), settings);
+      case settingsRoute:
+        return _buildPageRoute(const SettingsScreen(), settings);
+      case addAlbum:
+        return _buildPageRoute(const AddAlbumScreen(), settings);
+      case addPhotocard:
+        return _buildPageRoute(const AddPhotocardScreen(), settings);
+      case addLightstick:
+        return _buildPageRoute(const AddLightstickScreen(), settings);
       default:
         return _buildPageRoute(const LoginScreen(), settings);
     }
