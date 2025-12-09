@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (value == 'profile') {
                     Navigator.of(context).pushNamed(AppRouter.profile);
                   } else if (value == 'settings') {
-                    // TODO: Navegar a configuración
+                    Navigator.of(context).pushNamed(AppRouter.settingsRoute);
                   } else if (value == 'logout') {
                     _showLogoutDialog(context, authService);
                   }
@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icons.add_box,
                       Colors.blue,
                       () {
-                        // TODO: Navegar a añadir álbum
+                        Navigator.of(context).pushNamed(AppRouter.addAlbum);
                       },
                     ),
                     _buildActionCard(
@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icons.add_photo_alternate,
                       Colors.pink,
                       () {
-                        // TODO: Navegar a añadir photocard
+                        Navigator.of(context).pushNamed(AppRouter.addPhotocard);
                       },
                     ),
                     _buildActionCard(
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icons.highlight,
                       Colors.orange,
                       () {
-                        // TODO: Navegar a añadir lightstick
+                        Navigator.of(context).pushNamed(AppRouter.addLightstick);
                       },
                     ),
                     _buildActionCard(
@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icons.camera_alt,
                       Colors.green,
                       () {
-                        // TODO: Abrir cámara para escanear
+                        Navigator.of(context).pushNamed(AppRouter.lightstickRecognition);
                       },
                     ),
                   ],

@@ -12,7 +12,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(debugLabel: 'loginForm');
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -169,6 +169,9 @@ class _LoginFormState extends State<LoginForm> {
                         const SnackBar(content: Text('Función de recuperación de contraseña próximamente')),
                       );
                     },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                    ),
                     child: const Text('¿Olvidaste tu contraseña?'),
                   ),
                 ),

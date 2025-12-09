@@ -13,7 +13,7 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(debugLabel: 'registerForm');
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _collectorNameController = TextEditingController();
@@ -89,34 +89,34 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const SizedBox(height: 20),
-        
-        // Título del formulario
-        Text(
-          'Únete a Byeolpedia',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.primary,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          
+          // Título del formulario
+          Text(
+            'Únete a Byeolpedia',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Crea tu cuenta para empezar a coleccionar',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+          const SizedBox(height: 8),
+          Text(
+            'Crea tu cuenta para empezar a coleccionar',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
-        
-        const SizedBox(height: 30),
-        
-        Form(
-          key: _formKey,
-          child: SingleChildScrollView(
+          
+          const SizedBox(height: 30),
+          
+          Form(
+            key: _formKey,
             child: Column(
               children: [
                 // Campo de nombre de usuario
@@ -246,8 +246,8 @@ class _RegisterFormState extends State<RegisterForm> {
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
